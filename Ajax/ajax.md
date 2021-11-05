@@ -20,8 +20,6 @@ Some operations are restricted to same-origin content, and this restriction **ca
 
 前端浏览器会在请求分析当前页面域名与请求的域名是否相同，如果不相同必是跨域请求。此时此刻浏览器把请求分为2次，第一次是叫做OPTIONS请求(具体叫做**预检请求** **preflight request**)，然后端返回Access-Control-Allow-Origin判断是否与origin一致，如果一致可以进行下一步的GET或者POST的请求，如果不一致就会跨域的错误。
 
-###### 写了Access-Control-Allow-Origin与orgin相同的值还是出现跨域问题？
+###### **写了Access-Control-Allow-Origin与orgin相同的值还是出现跨域问题？**
 
-如果Access-Control-Allow-Origin与orgin相同的值还是出现跨域问题，正确来说不是跨域，是在预检请求的时候出现了错误，此时此刻可以看看**Access-Control-Allow-Headers**中是不是有一些**自定义的请求头**，当有了自定义的Access-Control-Allow-Headers时Access-Control-Allow-Origin是不允许直接使用"星号"，需要具体指明一个origin
-
-
+如果Access-Control-Allow-Origin与orgin相同的值还是出现跨域问题，正确来说不是跨域，是在预检请求的时候出现了错误，此时此刻可以看看**Access-Control-Allow-Headers**中是不是有一些**自定义的请求头**（此处自定义的请求头是指在Accept、Accept-Language、Content-Language、Content-Tye这4个大小写和符号都要一样除外的请求头，具体参考[CORS-safelisted request header - MDN Web Docs Glossary: Definitions of Web-related terms | MDN](https://developer.mozilla.org/en-US/docs/Glossary/CORS-safelisted_request_header#additional_restrictions)），当有了自定义的Access-Control-Allow-Headers时Access-Control-Allow-Origin是不允许直接使用"星号"，需要具体指明一个origin
